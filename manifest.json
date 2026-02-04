@@ -16,9 +16,9 @@
     {
       "id": "base_dir",
       "type": "text",
-      "name": "Base Projects Directory",
-      "default_value": "/home/Projects/java",
-      "description": "The main directory where all your Java projects are stored"
+      "name": "Base Projects Directories",
+      "default_value": "/home/Projects/java, $HOME/Documents, !~/backup",
+      "description": "Separate with commas. Use '!' prefix to disable a path."
     },
     {
       "id": "idea_bin",

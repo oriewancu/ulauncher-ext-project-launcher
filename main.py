@@ -26,27 +26,55 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items = []
         query = (event.get_argument() or "").lower()
-        
-        # Expand base_dir immediately
-        base_dir = extension.expand_path(extension.preferences['base_dir'])
 
-        if not os.path.exists(base_dir):
+        # Ambil string mentah dan pecah berdasarkan koma
+        raw_base_dirs = extension.preferences['base_dir'].split(',')
+
+        active_dirs = []
+        for path_str in raw_base_dirs:
+            path_str = path_str.strip()
+            # Cek apakah diawali '!' (disable)
+            if not path_str or path_str.startswith('!'):
+                continue
+
+            expanded = extension.expand_path(path_str)
+            if os.path.exists(expanded):
+                active_dirs.append(expanded)
+
+        if not active_dirs:
             return RenderResultListAction([
-                ExtensionResultItem(
-                    icon='images/icon.png', 
-                    name="Error: Path not found", 
-                    description=f"Path '{base_dir}' does not exist. Check Preferences.")
+                ExtensionResultItem(icon='images/icon.png', name="No Active Paths", description="Check your 'base_dir' configuration.")
             ])
 
-        projects = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
-        filtered = [p for p in projects if query in p.lower()][:8]
+        # Scan semua folder aktif
+        all_projects = []
+        for base_dir in active_dirs:
+            try:
+                for d in os.listdir(base_dir):
+                    full_path = os.path.join(base_dir, d)
+                    if os.path.isdir(full_path):
+                        # Simpan info folder beserta path asalnya
+                        all_projects.append({
+                            "name": d,
+                            "path": full_path,
+                            "parent": base_dir
+                        })
+            except Exception as e:
+                continue # Skip jika ada error permission dsb.
+
+        # Filter berdasarkan query
+        filtered = [p for p in all_projects if query in p['name'].lower()][:10]
 
         for project in filtered:
             items.append(ExtensionResultItem(
                 icon='images/icon.png',
-                name=project,
-                description=f"Manage project {project}",
-                on_enter=ExtensionCustomAction({"action": "show_menu", "project": project}, keep_app_open=True)
+                name=project['name'],
+                description=f"Path: {project['path']}",
+                on_enter=ExtensionCustomAction({
+                    "action": "show_menu",
+                    "project": project['name'],
+                    "path": project['path'] # Kirim path absolut langsung
+                }, keep_app_open=True)
             ))
 
         return RenderResultListAction(items)
@@ -55,16 +83,12 @@ class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         data = event.get_data()
         action = data.get("action")
-        project = data.get("project")
+        path = data.get("path")
         
         # Expand all preference paths
-        base_dir = extension.expand_path(extension.preferences['base_dir'])
         idea_bin = extension.expand_path(extension.preferences['idea_bin'])
-        git_tool = extension.preferences['git_tool']
+        git_tool = extension.expand_path(extension.preferences['git_tool'])
         terminal = extension.expand_path(extension.preferences['terminal_emulator'])
-        
-        # Ensure path is fully expanded
-        path = data.get("path") or (os.path.join(base_dir, project) if project else "")
 
         if action == "show_menu":
             return RenderResultListAction([
