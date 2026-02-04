@@ -1,0 +1,73 @@
+{
+  "required_api_version": "^2.0.0",
+  "name": "Personal Project Launcher",
+  "description": "Quick launch Java projects with Git, Sonar, and IDEs",
+  "developer_name": "Ansori, M.",
+  "icon": "images/icon.png",
+  "main_path": "main.py",
+  "preferences": [
+    {
+      "id": "project_kw",
+      "type": "keyword",
+      "name": "Project Launcher keyword",
+      "default_value": "p",
+      "description": "Keyword to trigger project search (e.g., p)"
+    },
+    {
+      "id": "base_dir",
+      "type": "text",
+      "name": "Base Projects Directory",
+      "default_value": "/home/Projects/java",
+      "description": "The main directory where all your Java projects are stored"
+    },
+    {
+      "id": "idea_bin",
+      "type": "text",
+      "name": "IntelliJ Executable Path",
+      "default_value": "/home/Applications/idea-IC-251.23774.435/bin/idea",
+      "description": "Full path to the IntelliJ IDEA executable (bin/idea)"
+    },
+    {
+      "id": "git_tool",
+      "type": "text",
+      "name": "Git Tool Script Path",
+      "default_value": "/home/ansori/script/git-tool.sh",
+      "description": "The absolute path to your git-tool.sh script"
+    },
+    {
+      "id": "terminal_emulator",
+      "type": "text",
+      "name": "Terminal Emulator",
+      "default_value": "gnome-terminal",
+      "description": "The command to open your terminal (e.g., gnome-terminal, xfce4-terminal, or konsole)"
+    },
+    {
+      "id": "sonar_89_url",
+      "type": "text",
+      "name": "Sonar 8.9 URL",
+      "default_value": "http://localhost:9010",
+      "description": "Server URL for SonarQube 8.9 LTS"
+    },
+    {
+      "id": "sonar_89_token",
+      "type": "text",
+      "name": "Sonar 8.9 Token",
+      "default_value": "3b92b272caeadc78ab7c9e1b4a633b11e864ab57",
+      "description": "Login token for SonarQube 8.9"
+    },
+    {
+      "id": "sonar_latest_url",
+      "type": "text",
+      "name": "Sonar Latest URL",
+      "default_value": "http://localhost:9020",
+      "description": "Server URL for the latest SonarQube version"
+    },
+    {
+      "id": "sonar_latest_token",
+      "type": "text",
+      "name": "Sonar Latest Token",
+      "default_value": "squ_1e8101284e92f7c2cef7e40c52cf9ead1181d108",
+      "description": "Access token for the latest SonarQube"
+    }
+  ]
+}
