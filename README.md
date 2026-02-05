@@ -9,6 +9,9 @@ A specialized Ulauncher extension for developers to accelerate project managemen
 - **Git Tooling**: Quick access to your custom Git management scripts.
 - **Flexible Path Support**: Supports `~/` and `$HOME` syntax for project directories and executables.
 
+## Overview
+![Overview](overview.png)
+
 ## 📖 Usage
 1. Trigger Ulauncher and type the keyword (default: `p`).
 2. Type the name of your folder project.
