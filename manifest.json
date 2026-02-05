@@ -17,57 +17,60 @@
       "id": "base_dir",
       "type": "text",
       "name": "Base Projects Directories",
-      "default_value": "/home/Projects/java, $HOME/Documents, !~/backup",
+      "default_value": "$HOME, ~/Downloads, !~/Movies",
       "description": "Separate with commas. Use '!' prefix to disable a path."
     },
     {
+      "id": "terminal_emulator",
+      "type": "select",
+      "name": "Terminal Emulator",
+      "description": "Select your terminal emulator",
+      "default_value": "gnome-terminal",
+      "options": [
+        {"text": "Gnome (gnome-terminal)", "value": "gnome-terminal"},
+        {"text": "Xfce (xfce4-terminal)", "value": "xfce4-terminal"},
+        {"text": "KDE Terminal (konsole)", "value": "konsole"},
+        {"text": "Terminator (terminator)", "value": "terminator"}
+      ]
+    },
+    {
       "id": "idea_bin",
-      "type": "text",
-      "name": "IntelliJ Executable Path",
-      "default_value": "/home/Applications/idea-IC-251.23774.435/bin/idea",
+      "type": "input",
+      "name": "IntelliJ Path",
+      "default_value": "/home/bin/idea",
       "description": "Full path to the IntelliJ IDEA executable (bin/idea)"
     },
     {
       "id": "git_tool",
-      "type": "text",
-      "name": "Git Tool Script Path",
-      "default_value": "/home/ansori/script/git-tool.sh",
+      "type": "input",
+      "name": "Git Tool Path",
+      "default_value": "$HOME/.local/share/ulauncher/extensions/com.github.oriewancu.ulauncher-ext-project-launcher/script/git-tool.sh",
       "description": "The absolute path to your git-tool.sh script"
     },
     {
-      "id": "terminal_emulator",
-      "type": "text",
-      "name": "Terminal Emulator",
-      "default_value": "gnome-terminal",
-      "description": "The command to open your terminal (e.g., gnome-terminal, xfce4-terminal, or konsole)"
+      "id": "sonar_version",
+      "type": "select",
+      "name": "SonarQube Version",
+      "description": "Select your SonarQube instance",
+      "default_value": "sonar_89",
+      "options": [
+        {"text": "SonarQube 8.9 LTS", "value": "sonar_89"},
+        {"text": "SonarQube Latest", "value": "sonar_latest"}
+      ]
     },
     {
-      "id": "sonar_89_url",
-      "type": "text",
-      "name": "Sonar 8.9 URL",
-      "default_value": "http://localhost:9010",
-      "description": "Server URL for SonarQube 8.9 LTS"
+      "id": "sonar_url",
+      "type": "input",
+      "name": "Sonar URL",
+      "default_value": "http://localhost:9000",
+      "description": "Server URL for the selected SonarQube version"
     },
     {
-      "id": "sonar_89_token",
-      "type": "text",
-      "name": "Sonar 8.9 Token",
-      "default_value": "3b92b272caeadc78ab7c9e1b4a633b11e864ab57",
-      "description": "Login token for SonarQube 8.9"
-    },
-    {
-      "id": "sonar_latest_url",
-      "type": "text",
-      "name": "Sonar Latest URL",
-      "default_value": "http://localhost:9020",
-      "description": "Server URL for the latest SonarQube version"
-    },
-    {
-      "id": "sonar_latest_token",
-      "type": "text",
-      "name": "Sonar Latest Token",
-      "default_value": "squ_1e8101284e92f7c2cef7e40c52cf9ead1181d108",
-      "description": "Access token for the latest SonarQube"
+      "id": "sonar_token",
+      "type": "input",
+      "name": "Sonar Token",
+      "default_value": "",
+      "description": "Access token for the selected SonarQube"
     }
   ]
 }

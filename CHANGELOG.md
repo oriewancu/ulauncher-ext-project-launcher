@@ -2,6 +2,12 @@
 
 All notable changes to the **Project Launcher** extension will be documented in this file.
 
+## [1.0.1] - 2026-02-05
+
+### Added
+- **Support Multiple Terminal**: gnome-terminal, konsole, xfce4-terminal and konsole.
+- **Define Run Sonar Coverage**: Choose preference sonar 8.9 LTS or latest.
+
 ## [1.0.0] - 2026-02-04
 
 ### Added
